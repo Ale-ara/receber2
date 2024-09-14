@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>[VG] - Questionário </title>
+    <link rel="icon" href="https://i.imgur.com/NYWo4cP.png">
+    <link rel="stylesheet" href="css.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet">
+    
+    <style>
+        html {
+            height: 100%;
+            background: #5c1615;
+            background-image: url('https://i.imgur.com/pp8Wbl1.png');
+            background-position: center center;
+            background-repeat: repeat;
+            background-attachment: scroll;
+            background-blend-mode: normal;
+            animation: gradientAnimation 15s ease infinite;
+        }
+    
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: "Poppins", sans-serif;
+            overflow-y: auto;
+            background: transparent;
+        }
+    
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        #loadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            z-index: 1000;
+        }
+
+        .total {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    
+        label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #333;
+            display: block;
+        }
+    
+        input[type="text"],
+        input[type="tel"],
+        select,
+        input[type="number"],
+        textarea {
+            width: 100%;
+            height: 52px;
+            background-color: #e7e7e7;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            color: #282828;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+    
+        textarea {
+            resize: none;
+            height: auto;
+        }
+
+        button {
+            width: 100%;
+            height: 68px;
+            background-color: #a2403f;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+    
+        button:hover {
+            background-color: rgba(193, 11, 8, 0.542);
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+    
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #237927;
+        }
+
+        body {
+            scrollbar-width: thin;
+            scrollbar-color: #2b832f #104212;
+        }
+
+        @media screen and (min-width: 2560px) and (min-height: 1440px) {
+            .container {
+                margin-top: 220px; 
+            }
+        }
+    
+        @media screen and (min-width: 1920px) and (min-height: 1080px) {
+            .container {
+                margin-top: 200px; 
+            }
+        }
+    
+        @media screen and (min-width: 1600px) and (max-width: 1919px) {
+            .container {
+                margin-top: 150px; 
+            }
+        }
+    
+        @media screen and (min-width: 1366px) and (max-width: 1599px) {
+            .container {
+                margin-top: 120px; 
+            }
+        }
+    
+        @media screen and (min-width: 1280px) and (max-width: 1365px) {
+            .container {
+                margin-top: 110px; 
+            }
+        }
+    
+        @media screen and (min-width: 1024px) and (max-width: 1279px) {
+            .container {
+                margin-top: 100px; 
+            }
+        }
+    
+        @media screen and (min-width: 768px) and (max-width: 1023px) {
+            .container {
+                margin-top: 90px; 
+            }
+        }
+    
+        @media screen and (max-width: 767px) {
+            .container {
+                margin-top: 80px; 
+            }
+        }
+
+        .icon {
+    width: 24px;
+    height: 24px; 
+    vertical-align: middle; 
+}
+
+#loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #5c1615;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 2em;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    /* Esconder a tela de carregamento */
+    #loading-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* Animação para o texto "Carregando..." */
+    @keyframes fadeInOut {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    /* Aplicar a animação ao texto */
+    #loading-screen span {
+      animation: fadeInOut 1s infinite;
+    }
+
+    /* Animação para o conteúdo */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+        /* Tamanho da imagem para desktops */
+        #loading-screen img {
+            width: 700px; /* Tamanho maior para telas grandes */
+            height: auto; /* Mantém a proporção da imagem */
+            max-width: 100%; /* Garante que a imagem não ultrapasse a largura da tela */
+        }
+
+        /* Media query para telas com largura menor ou igual a 1080px (celulares) */
+        @media (max-width: 1080px) {
+            #loading-screen img {
+                width: 200px; /* Tamanho ajustado para celulares */
+                height: auto; /* Mantém a proporção da imagem */
+            }
+        }
+
+        /* Media query para telas ainda menores, como smartphones */
+        @media (max-width: 600px) {
+            #loading-screen img {
+                width: 150px; /* Tamanho menor ainda para smartphones */
+                height: auto; /* Mantém a proporção da imagem */
+            }
+        }
+
+
+    </style>
+</head>
+<body onload="hideLoadingOverlay()">
+    <div id="loading-screen">
+        <img src="https://i.imgur.com/VeEzkJ9.jpeg" alt="Carregando...">
+    </div>
+    <div id="loadingOverlay">Carregando...</div>
+    <div class="container">
+        <h1>Questionário <img src="https://i.imgur.com/TvnWvdF.gif" alt="Questionário" class="icon" /></h1>
+        <form id="beautyForm">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" placeholder="Insira o nome" required>
+        
+            <label for="tel">Telefone:</label>
+            <input type="tel" id="telefone" name="telefone" placeholder="(99) 99999-9999">
+        
+            <label for="rua">Liderança:</label>
+            <input type="text" id="rua" name="rua" placeholder="Liderança que indicou Vitor ou veio direto?" required>
+                    
+        
+            <label for="bairro">Bairro:</label>
+            <input type="text" id="bairro" name="bairro" placeholder="Nome do bairro" required>
+
+            <label for="localdevoto">Qual é o seu bairro de voto?</label>
+            <input type="text" id="localdevoto" name="localdevoto" placeholder="Insira seu bairro de voto">
+
+
+
+            <label for="localvoto">Voto:</label>
+            <select id="localvoto" name="localvoto" required>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+            </select>
+        
+        
+            <button type="submit" id="submitButton">Enviar</button>
+        </form>
+        
+    
+    <script>
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbxJ4v-m9mzawBtSWKqVGzdy3Uynj-Ts6Qj7EZssSe0uA7V5iZquM8kc0t8iYNJNv7tW2A/exec';
+        let isSubmitting = false;
+    
+        function hideLoadingOverlay() {
+            const overlay = document.getElementById('loadingOverlay');
+            if (overlay) {
+                overlay.style.display = 'none';
+            }
+        }
+    
+        function handleFormSubmit(event) {
+            event.preventDefault();
+    
+            if (isSubmitting) {
+                return false;
+            }
+    
+            isSubmitting = true;
+    
+            const form = event.target;
+            const formData = new FormData(form);
+    
+            fetch(scriptUrl, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => {
+                console.log(result);
+                alert('Formulário enviado com sucesso!');
+                form.reset();
+            })
+            .catch(error => {
+                console.error('Erro ao enviar o formulário:', error);
+                alert('Houve um erro ao enviar o formulário.');
+            })
+            .finally(() => {
+                isSubmitting = false;
+                hideLoadingOverlay();
+            });
+    
+            return false;
+        }
+    
+        document.getElementById('beautyForm').addEventListener('submit', handleFormSubmit);
+    </script>
+<script>
+    window.addEventListener('load', function() {
+      const loadingScreen = document.getElementById('loading-screen');
+      
+      
+      setTimeout(() => {
+        loadingScreen.classList.add('hidden');
+      }, 2000); 
+    });
+  </script>
+
+
+</body>
+</html>    
